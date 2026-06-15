@@ -47,27 +47,39 @@ X-Api-Key: {your_api_key}
   "data": {
     "1": {
       "3": {
-        "fio": "Процедурный кабинет Москва",
+        "fio": "Процедурный кабинет Москва (ул.Донская, д. 28)",
         "crm_room_id": 3,
         "cells": {
-          "16:00-17:00": {
-            "number_booked_cells": 8,
-            "cells_list": [
-              {
-                "dt": "2026-06-11",
-                "time_start": "16:40:00",
-                "time_end": "16:45:00",
-                "type": 1,
-                "number_booked": 1
-              },
-              {
-                "dt": "2026-06-11",
-                "time_start": "16:45:00",
-                "time_end": "16:50:00",
-                "type": 1,
-                "number_booked": 7
-              }
-            ]
+          "2026-06-15": {
+            "8:00-9:00": {
+              "number_booked_cells": 4,
+              "cells_list": [
+                {
+                  "dt": "2026-06-15",
+                  "time_start": "08:00:00",
+                  "time_end": "08:05:00",
+                  "type": 1,
+                  "number_booked": 1
+                },
+               {
+                  "dt": "2026-06-15",
+                  "time_start": "08:05:00",
+                  "time_end": "08:10:00",
+                  "type": 1,
+                  "number_booked": 3
+                }
+              ]
+            },
+           "9:00-10:00": {
+              "number_booked_cells": 0,
+              "cells_list": [...]
+            }
+          },
+          "2026-06-16": {
+            "8:00-9:00": {
+              "number_booked_cells": 0,
+              "cells_list": [...]
+            }
           }
         }
       }
