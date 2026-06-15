@@ -270,7 +270,7 @@ X-Api-Key: {your_api_key}
 
 | Ключ                      | Тип     | Описание                                           |
 |---------------------------|---------|----------------------------------------------------|
-| `crm_appointment_alter_id`| int     | crm.appointment_alter.id                                 |
+| `crm_appointment_alter_id`| int     | crm.appointment_alter.id                           |
 
 ---
 ### Пример запроса
@@ -310,8 +310,7 @@ X-Api-Key: {your_api_key}
   "crm_room_id": 3,
   "analysis_id": 1992,
   "dt": "2026-06-19",
-  "time_start": "08:00:00",
-  "time_end": "08:05:00",
+  "time_start": "08:00:00", 
   "lk_id": 124,  
   "price_order_uid": "622F2BCDC6C32", 
   "p_email": "patient@example.com",
