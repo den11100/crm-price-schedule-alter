@@ -155,9 +155,6 @@ X-Api-Key: {your_api_key}
     }
 }
 ```
-
-
-
 ### Ошибки Ответ 200 ОК
 ```json
 {
@@ -169,52 +166,10 @@ X-Api-Key: {your_api_key}
 
 
 
-## 📘 API: Получение продолжительности приёма по тестам
-
-
-### Описание:
-Возвращает продолжительность приёма (в минутах) для указанных тестов по их `analysis_id`.  
-Если список `analysis_ids` не передан — вернутся все записи.
-Если для теста нет информации, значит приём длится 10 минут.
-
-
-### URL: `/api/price/schedule/duration-analysis`
-### 📥 Тело запроса может быть пустым или [] или [erp.analysis.id, ...]
-
-```json
-{
-  "analysis_ids": [25, 30]
-}
-```
-
-#### Ответ 200 ОК
-```json
-{
-    "status": "success",
-    "data": {
-        "25": 20,
-        "30": 20,
-        "317": 20,
-        "426": 40,
-        "439": 20
-    }
-}
-```
-
-"25" - это erp.analysis.id
-
-
-#### Ответ 200 ОК (значит нет информации по тесту)
-```json
-{
-    "status": "success",
-    "data": []
-}
-```
 
 
 # Добавить данные по Пациенту (оплата ещё не состоялась).
-### URL: `/api/price/schedule/confirm-appointment`
+### URL: `/api/price/schedule-alter/confirm-appointment-alter`
 
 
 #### Обязательные параметры
@@ -222,7 +177,7 @@ X-Api-Key: {your_api_key}
 | Ключ                       | Тип    | Описание                                  |
 |----------------------------|--------|-------------------------------------------|
 | `lk_id`                    | int    | Идентификатор личного кабинета            |
-| `crm_appointment_alter_id` | int    | `crm.crm_appointment_alter.id`            |
+| `crm_appointment_alter_id` | int    | `crm.appointment_alter.id`            |
 | `price_order_uid`          | string | Уникальный идентификатор заказа из прайса |
 | `p_email`                  | string | Email пациента                            |
 | `p_family`                 | string | Фамилия пациента                          |
@@ -241,7 +196,7 @@ X-Api-Key: {your_api_key}
 
 ## Логика выполнения
 
-1. По `crm_appointment_id` ищется слот в таблице `crm.appointment`.
+1. По `crm_appointment_alter_id` ищется слот в таблице `crm.appointment_alter`.
    - Если не найден — возвращается сообщение:  
      `"Бронирование слота не найдено"`
 
@@ -249,7 +204,7 @@ X-Api-Key: {your_api_key}
    - При неудаче возвращается сообщение:  
      `"Ошибка создания пациента: <текст_ошибки>"`
 
-4. Сохраняется модель Appointment:
+4. Сохраняется модель AppointmentAlter:
    - Если сохранение не удалось — возвращается сообщение:  
      `"Ошибка сохранения записи: <список_ошибок>"`
 
@@ -259,7 +214,7 @@ X-Api-Key: {your_api_key}
 ```json
 {
   "lk_id": 123,
-  "crm_appointment_id": 98435,
+  "crm_appointment_alter_id": 39,
   "price_order_uid": "622F2BCDC6C31", 
   "p_email": "patient@example.com",
   "p_family": "Иванов",
@@ -286,7 +241,7 @@ X-Api-Key: {your_api_key}
 ```json
 {
     "status": "fail",
-    "error": "Не переданы обязательные параметры: crm_appointment_id",
+    "error": "Не переданы обязательные параметры: crm_appointment_alter_id",
     "code": 10
 }
 ```
@@ -309,19 +264,19 @@ X-Api-Key: {your_api_key}
 
 
 # Подтверждение оплаты
-### URL: `/api/price/schedule/after-paid`
+### URL: `/api/price/schedule-alter/after-paid-alter`
 
 #### Обязательные параметры:
 
-| Ключ                | Тип     | Описание                                           |
-|---------------------|---------|----------------------------------------------------|
-| `crm_appointment_id`| int     | crm.appointment.id                                 |
+| Ключ                      | Тип     | Описание                                           |
+|---------------------------|---------|----------------------------------------------------|
+| `crm_appointment_alter_id`| int     | crm.appointment_alter.id                                 |
 
 ---
 ### Пример запроса
 ```json
 { 
-  "crm_appointment_id": 98435, 
+  "crm_appointment_alter_id": 98435, 
 }
 ```
 
@@ -345,18 +300,18 @@ X-Api-Key: {your_api_key}
 ```
 
 # Метод сразу для резерва и подтверждения оплаты (нужно присыласть сразу все данные)
-### URL: `/api/price/schedule/reserve-and-pay`
+### URL: `/api/price/schedule-alter/reserve-and-pay-alter`
 
 ### все параметр обязательные кроме `p_patronymic`
 
 ### Пример запроса
 ```json
 { 
-  "crm_room_id": 97,
+  "crm_room_id": 3,
   "analysis_id": 1992,
-  "dt": "2025-07-11",
+  "dt": "2026-06-19",
   "time_start": "08:00:00",
-  "time_end": "08:30:00",
+  "time_end": "08:05:00",
   "lk_id": 124,  
   "price_order_uid": "622F2BCDC6C32", 
   "p_email": "patient@example.com",
@@ -373,7 +328,7 @@ X-Api-Key: {your_api_key}
 {
     "status": "success",
     "data": {
-        "crm_appointment_id": 102305
+        "crm_appointment_alter_id": 102305
     }
 }
 ```
@@ -407,8 +362,6 @@ X-Api-Key: {your_api_key}
     "code": 13
 }
 ```
-
-
 
 
 ## 🧾 Коды ошибок API
