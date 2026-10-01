@@ -145,6 +145,7 @@ X-Api-Key: {your_api_key}
 необязательный
 | type           | int     |1 - очно                   3 -онлайн                         |
 | time_end       | string  | Время окончания можно не передавать я автоматом высчитываю  |
+| comment        | string  | в базе поле text()                                          |
 
 ### Пример запроса
 
@@ -203,6 +204,7 @@ X-Api-Key: {your_api_key}
 |---------------------|---------|----------------------------------------------------|
 | `p_patronymic`      | string  | Отчество пациента                                  |
 | `p_birth`           | string  | Дата рождения в формате `Y-m-d`                    |
+| `comment`           | string  | в базе поле text()                                 |
 
 ---
 
@@ -314,7 +316,7 @@ X-Api-Key: {your_api_key}
 # Метод сразу для резерва и подтверждения оплаты (нужно присыласть сразу все данные)
 ### URL: `/api/price/schedule-alter/reserve-and-pay-alter`
 
-### все параметр обязательные кроме `p_patronymic`
+### все параметр обязательные кроме `p_patronymic` и `comment`
 
 ### Пример запроса
 ```json
@@ -331,7 +333,8 @@ X-Api-Key: {your_api_key}
   "p_name": "Иван", 
   "p_patronymic": "Иванович",
   "p_sex": 1,
-  "p_birth": "1980-12-30"
+  "p_birth": "1980-12-30",
+  "comment": "some string any length"
 }
 ```
 #### Ответ 200 ОК
